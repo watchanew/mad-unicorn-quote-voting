@@ -1,26 +1,63 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --mad-yellow: #FFD600;
+    --mad-orange: #FF6F00;
+    --mad-gray: #4A4A4A;
+  }
+
+  body {
+    @apply bg-black text-white;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .mad-gradient {
+    @apply bg-gradient-to-r from-mad-yellow to-mad-orange;
+  }
+
+  .glass-effect {
+    @apply bg-gray-900/90 backdrop-blur-xl border border-yellow-500/20;
+  }
+
+  .mad-button {
+    @apply px-4 py-2 mad-gradient text-black font-bold rounded-lg 
+           hover:from-yellow-400 hover:to-orange-400 
+           transform hover:scale-[1.02] transition-all duration-200 shadow-lg;
+  }
+
+  .mad-input {
+    @apply w-full px-4 py-3 bg-black/50 border border-gray-700 rounded-lg 
+           text-white placeholder-gray-500 focus:outline-none 
+           focus:border-mad-yellow transition-colors;
+  }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1f2937;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--mad-yellow);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--mad-orange);
 }
