@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import LoginForm from '@/components/LoginForm';
 import Header from '@/components/Header';
 import QuoteCard from '@/components/QuoteCard';
@@ -11,7 +10,6 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 import { Search } from 'lucide-react';
 
 export default function Home() {
-  const router = useRouter();
   const [user, setUser] = useLocalStorage<User | null>('madUnicornUser', null);
   const [quotes, setQuotes] = useLocalStorage<Quote[]>('madUnicornQuotes', []);
   const [searchTerm, setSearchTerm] = useState('');
@@ -19,11 +17,6 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!user) {
-      router.push('/');
-      return;
-    }
-
     // Initialize quotes if empty
     if (quotes.length === 0) {
       const mockQuotes = getMockQuotes(5);
@@ -31,7 +24,7 @@ export default function Home() {
     }
     
     setIsLoading(false);
-  }, [user, router, quotes.length, setQuotes]);
+  }, [quotes.length, setQuotes]);
 
   const handleLogin = (newUser: User) => {
     setUser(newUser);
@@ -39,7 +32,6 @@ export default function Home() {
 
   const handleLogout = () => {
     setUser(null);
-    router.push('/');
   };
 
   const handleVote = (id: number, delta: number) => {
@@ -70,7 +62,11 @@ export default function Home() {
   };
 
   if (isLoading) {
-    return null;
+    return (
+      <div className="min-h-screen bg-gray-950 flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
   }
 
   if (!user) {
@@ -109,6 +105,7 @@ export default function Home() {
             </select>
           </div>
         </div>
+
         {/* Quotes Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredQuotes.map((quote) => (
@@ -117,6 +114,12 @@ export default function Home() {
             </div>
           ))}
         </div>
+
+        {filteredQuotes.length === 0 && (
+          <div className="text-center text-gray-400 py-12">
+            <p>No quotes found matching your search.</p>
+          </div>
+        )}
       </main>
     </div>
   );
