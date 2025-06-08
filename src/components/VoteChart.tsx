@@ -68,10 +68,16 @@ export default function VoteChart({ quotes, chartType }: VoteChartProps) {
               fill="#8884d8"
               dataKey="votes"
               label={({ percent }) => `${(percent * 100).toFixed(0)}%`}
-              onClick={() => {}}
+              stroke="none"
+              style={{ outline: 'none', cursor: 'default' }}
             >
               {data.slice(0, 5).map((entry, index) => (
-                <Cell key={`cell-${index}`} fill={CHART_COLORS[index % CHART_COLORS.length]} />
+                <Cell 
+                  key={`cell-${index}`} 
+                  fill={CHART_COLORS[index % CHART_COLORS.length]}
+                  stroke="none"
+                  style={{ outline: 'none' }}
+                />
               ))}
             </Pie>
             <Tooltip

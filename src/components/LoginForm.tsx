@@ -55,6 +55,8 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
     }
 
     if (VALID_USERS[username as keyof typeof VALID_USERS] === password) {
+      // Clear localStorage when logging in (fresh start)
+      localStorage.removeItem('madUnicornQuotes');
       onLogin({ username });
     } else {
       setError('Invalid username or password');
