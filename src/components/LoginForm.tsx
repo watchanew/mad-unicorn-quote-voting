@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect, useRef } from 'react';
-import { Zap, Flame, AlertCircle } from 'lucide-react';
+import { AlertCircle } from 'lucide-react';
 import { User } from '@/types';
 import Image from 'next/image';
 import { gsap } from 'gsap';
@@ -157,7 +157,7 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
 
             <div className="mt-6 text-center">
               <p className="text-gray-500 text-sm mb-2">
-                "ตอนนี้ คุณได้เป็นหัวแถวแล้ว!"
+                &quot;ตอนนี้ คุณได้เป็นหัวแถวแล้ว!&quot;
               </p>
               <div className="text-xs text-gray-600">
                 <p>Demo accounts:</p>

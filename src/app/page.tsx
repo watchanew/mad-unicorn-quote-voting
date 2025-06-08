@@ -52,7 +52,7 @@ export default function Home() {
   };
 
   const getFilteredAndSortedQuotes = () => {
-    let filtered = quotes.filter(quote =>
+    const filtered = quotes.filter(quote =>
       quote.text.toLowerCase().includes(searchTerm.toLowerCase()) ||
       quote.author.toLowerCase().includes(searchTerm.toLowerCase())
     );
